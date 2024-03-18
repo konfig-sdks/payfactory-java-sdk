@@ -1,0 +1,2699 @@
+openapi: 3.0.1
+info:
+  description: "Payfactory specializes in embedded payment facilitation (payfac) services\
+    \ for ISVs and SaaS companies. Our gateway-friendly platform integrates with software\
+    \ systems to provide seamless payment facilitation with little to no development\
+    \ required, allowing our partners to minimize integration costs and quickly gain\
+    \ a new revenue stream. Founded by payment industry veterans, we believe that\
+    \ integrated processing should be simple, frictionless and fast – while also maintaining\
+    \ the highest level of security, customer service and human support."
+  title: Payfactory Api
+  version: v1
+  x-konfig-ignore:
+    object-with-no-properties: true
+    potential-incorrect-type: true
+  x-konfig-has-globally-required-security: true
+  x-konfig-uses-multipart-form-data: true
+servers:
+- url: https://dev-api.payfactory.app
+security:
+- ApiKey: []
+tags:
+- name: Application
+- name: Reporting
+- name: ApplicationForm
+- name: Transaction
+- name: Document
+paths:
+  /v1/Application/Status/{appId}:
+    get:
+      operationId: Application_getApplicationStatus
+      parameters:
+      - description: ""
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationStatusResponse'
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationGetApplicationStatusResponse'
+          description: Unauthorized
+          x-do-not-generate: true
+      summary: Gets the Status of an Application
+      tags:
+      - Application
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--v1-Application-Status-appId
+      x-accepts: application/json
+  /v1/Application/Details/{appId}:
+    get:
+      operationId: Application_getApplicationDetails
+      parameters:
+      - description: ""
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDetailsResponse'
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationGetApplicationDetailsResponse'
+          description: Unauthorized
+          x-do-not-generate: true
+      summary: Gets Details for an Application
+      tags:
+      - Application
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--v1-Application-Details-appId
+      x-accepts: application/json
+  /v1/Application/StartUnderwriting/{appId}:
+    post:
+      operationId: Application_startUnderwritingProcess
+      parameters:
+      - description: ""
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationStartUnderwritingProcessResponse'
+          description: Unauthorized
+          x-do-not-generate: true
+      summary: Start Underwriting Process for an Application
+      tags:
+      - Application
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--v1-Application-StartUnderwriting-appId
+      x-accepts: application/json
+  /v1/Application/Submit:
+    post:
+      operationId: Application_createNewApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSubmitRequestModel'
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSubmitResponseModel'
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationCreateNewApplicationResponse'
+          description: Unauthorized
+          x-do-not-generate: true
+      summary: Submit a new Application
+      tags:
+      - Application
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--v1-Application-Submit
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/Application/Delete/{appId}:
+    delete:
+      operationId: Application_removeById
+      parameters:
+      - explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+      tags:
+      - Application
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-delete--v1-Application-Delete-appId
+      x-accepts: application/json
+  /v1/ApplicationForm/session/{sessionId}:
+    get:
+      operationId: ApplicationForm_getSessionInfo
+      parameters:
+      - description: ""
+        explode: false
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationFormGetSessionInfoResponse'
+          description: Unauthorized
+          x-do-not-generate: true
+      summary: Gets information about a Session
+      tags:
+      - ApplicationForm
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--v1-ApplicationForm-session-sessionId
+      x-accepts: application/json
+    put:
+      operationId: ApplicationForm_updateSessionActivity
+      parameters:
+      - description: ""
+        explode: false
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationFormUpdateSessionActivityResponse'
+          description: Unauthorized
+          x-do-not-generate: true
+      summary: "Touch a Session, keeping it active"
+      tags:
+      - ApplicationForm
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-put--v1-ApplicationForm-session-sessionId
+      x-accepts: application/json
+  /v1/ApplicationForm/session:
+    post:
+      operationId: ApplicationForm_createSession
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionRequest'
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationFormCreateSessionResponse'
+          description: Unauthorized
+          x-do-not-generate: true
+      summary: Creates a new Session
+      tags:
+      - ApplicationForm
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--v1-ApplicationForm-session
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/Document/Upload/{type}/{appId}:
+    post:
+      operationId: Document_uploadAgreement
+      parameters:
+      - description: ""
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ""
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              Document:
+                style: form
+            schema:
+              $ref: '#/components/schemas/DocumentUploadAgreementRequest'
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+      summary: Upload an Agreement for a new Application
+      tags:
+      - Document
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--v1-Document-Upload-type-appId
+      x-content-type: multipart/form-data
+      x-accepts: application/json
+  /v1/Reporting/Deposits:
+    get:
+      operationId: Reporting_getDeposits
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportingGetDepositsResponse'
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportingGetDeposits401Response'
+          description: Unauthorized
+          x-do-not-generate: true
+      summary: Get current Deposits
+      tags:
+      - Reporting
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--v1-Reporting-Deposits
+      x-accepts: application/json
+  /v1/Reporting/Deposits/{referenceId}:
+    get:
+      operationId: Reporting_getDepositsByReferenceId
+      parameters:
+      - description: ""
+        explode: false
+        in: path
+        name: referenceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportingGetDepositsByReferenceIdResponse'
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportingGetDepositsByReferenceId401Response'
+          description: Unauthorized
+          x-do-not-generate: true
+      summary: Get Deposits by ReferenceId.
+      tags:
+      - Reporting
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--v1-Reporting-Deposits-referenceId
+      x-accepts: application/json
+  /v1/Reporting/AchTransactions/{referenceId}:
+    get:
+      operationId: Reporting_getAchTransactionsByReferenceId
+      parameters:
+      - explode: false
+        in: path
+        name: referenceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportingGetAchTransactionsByReferenceIdResponse'
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportingGetAchTransactionsByReferenceId401Response'
+          description: Unauthorized
+          x-do-not-generate: true
+      tags:
+      - Reporting
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--v1-Reporting-AchTransactions-referenceId
+      x-accepts: application/json
+  /v1/Reporting/Deposits/{numberOfDeposits}:
+    get:
+      operationId: Reporting_getDepositsByCount
+      parameters:
+      - description: ""
+        explode: false
+        in: path
+        name: numberOfDeposits
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportingGetDepositsByCountResponse'
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportingGetDepositsByCount401Response'
+          description: Unauthorized
+          x-do-not-generate: true
+      summary: "Get {n} current Deposits"
+      tags:
+      - Reporting
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--v1-Reporting-Deposits-numberOfDeposits
+      x-accepts: application/json
+  /v1/Transaction/Metadata:
+    post:
+      operationId: Transaction_createMetadata
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionMetadataRequest'
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionCreateMetadataResponse'
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionCreateMetadata401Response'
+          description: Unauthorized
+          x-do-not-generate: true
+      summary: Post Metadata related to a Transaction
+      tags:
+      - Transaction
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--v1-Transaction-Metadata
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/Transaction/MetadataBulk:
+    post:
+      operationId: Transaction_createMetadataBulk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionCreateMetadataBulkRequest'
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionCreateMetadataBulkResponse'
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultiErrorResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionCreateMetadataBulk401Response'
+          description: Unauthorized
+          x-do-not-generate: true
+      summary: Post multiple Metadate related to a Transactions
+      tags:
+      - Transaction
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--v1-Transaction-MetadataBulk
+      x-content-type: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    AddressModel:
+      example:
+        zip: "74555"
+        country: country
+        city: Tulsa
+        street1: 125 West Third Street 1st Floor
+        street2: street2
+        state: OK
+      properties:
+        country:
+          nullable: true
+          readOnly: true
+          type: string
+        street1:
+          example: 125 West Third Street 1st Floor
+          maxLength: 40
+          minLength: 2
+          type: string
+          x-konfig-original-example: 125 West Third Street 1st Floor
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AddressModel-properties-street1
+        street2:
+          maxLength: 40
+          nullable: true
+          type: string
+        city:
+          example: Tulsa
+          maxLength: 28
+          minLength: 2
+          pattern: "^[a-zA-Z ]+$"
+          type: string
+          x-konfig-original-example: Tulsa
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AddressModel-properties-city
+        state:
+          example: OK
+          minLength: 1
+          type: string
+          x-konfig-original-example: OK
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AddressModel-properties-state
+        zip:
+          example: "74555"
+          maxLength: 5
+          minLength: 1
+          pattern: "^[0-9]{5}$"
+          type: string
+          x-konfig-original-example: "74555"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AddressModel-properties-zip
+      required:
+      - city
+      - state
+      - street1
+      - zip
+      type: object
+    ApplicationDetailsResponse:
+      example:
+        ownershipType: ownershipType
+        website: website
+        address:
+          zip: "74555"
+          country: country
+          city: Tulsa
+          street1: 125 West Third Street 1st Floor
+          street2: street2
+          state: OK
+        externalId: externalId
+        dbaName: dbaName
+        legalName: legalName
+        monthlyTransactionVolume: 0
+        phone: phone
+        customerService:
+          phone: phone
+          email: email
+        taxId: taxId
+        appId: appId
+        merchantCategoryCode: merchantCategoryCode
+        signer:
+          firstName: firstName
+          lastName: lastName
+          phone: phone
+          title: title
+          email: email
+      properties:
+        appId:
+          nullable: true
+          type: string
+        externalId:
+          nullable: true
+          type: string
+        legalName:
+          nullable: true
+          type: string
+        dbaName:
+          nullable: true
+          type: string
+        ownershipType:
+          nullable: true
+          type: string
+        taxId:
+          nullable: true
+          type: string
+        address:
+          $ref: '#/components/schemas/AddressModel'
+        phone:
+          nullable: true
+          type: string
+        website:
+          nullable: true
+          type: string
+        customerService:
+          $ref: '#/components/schemas/ApplicationDetailsResponse.CustomerServiceModel'
+        signer:
+          $ref: '#/components/schemas/ApplicationDetailsResponse.SignerModel'
+        monthlyTransactionVolume:
+          format: int32
+          type: integer
+        merchantCategoryCode:
+          nullable: true
+          type: string
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    ApplicationDetailsResponse.CustomerServiceModel:
+      example:
+        phone: phone
+        email: email
+      properties:
+        phone:
+          nullable: true
+          type: string
+        email:
+          nullable: true
+          type: string
+      type: object
+    ApplicationDetailsResponse.SignerModel:
+      example:
+        firstName: firstName
+        lastName: lastName
+        phone: phone
+        title: title
+        email: email
+      properties:
+        title:
+          nullable: true
+          type: string
+        firstName:
+          nullable: true
+          type: string
+        lastName:
+          nullable: true
+          type: string
+        email:
+          nullable: true
+          type: string
+        phone:
+          nullable: true
+          type: string
+      type: object
+    ApplicationStatus:
+      enum:
+      - Unknown
+      - Submitted
+      - Pending
+      - Underwriting
+      - Approved
+      - Declinded
+      - Onboarded
+      type: string
+    ApplicationStatusResponse:
+      example:
+        legalName: legalName
+        dba: dba
+        appId: appId
+        externalId: externalId
+        status: null
+      properties:
+        appId:
+          nullable: true
+          type: string
+        status:
+          $ref: '#/components/schemas/ApplicationStatus'
+        legalName:
+          nullable: true
+          type: string
+        dba:
+          nullable: true
+          type: string
+        externalId:
+          nullable: true
+          type: string
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    ApplicationSubmitRequestModel:
+      example:
+        bankDetails:
+          routingNumber: "082900872"
+          accountNumber: "1234567890"
+        customerServiceContact:
+          phone: "5551234567"
+          email: test@test.com
+        riskContact:
+          firstName: John
+          lastName: Doe
+          email: test@test.com
+        processingDetails:
+          billingDescriptor: ACME_WEST_POS
+          monthlyTransactionVolume: 1000
+          cardPresentPerctange: 10
+          dailyTransactionCount: 5000
+          highTransactionAmount: 4000
+          cardNotPresentPerctange: 90
+          averageTransactionAmount: 3000
+          lowTransactionAmount: 2000
+        businessContact:
+          firstName: John
+          lastName: Doe
+          phone: "5551234567"
+          dob: 2000-01-23T04:56:07.000+00:00
+          title: CEO
+          email: test@test.com
+          ssn: "5554449999"
+          homeAddress:
+            zip: "74555"
+            country: country
+            city: Tulsa
+            street1: 125 West Third Street 1st Floor
+            street2: street2
+            state: OK
+        isvName: isvName
+        externalId: externalId
+        pricingStructure:
+          billingFrequency: null
+          discover:
+            rate: 2.5
+            fee: 0.25
+          amex:
+            rate: 2.5
+            fee: 0.25
+          program: null
+          monthlyFee: 25
+          visaMasterCard:
+            rate: 2.5
+            fee: 0.25
+        owners:
+        - firstName: John
+          lastName: Doe
+          phone: "5551234567"
+          dob: 2000-01-23T04:56:07.000+00:00
+          title: CEO
+          email: test@test.com
+          ssn: "5554449999"
+          homeAddress:
+            zip: "74555"
+            country: country
+            city: Tulsa
+            street1: 125 West Third Street 1st Floor
+            street2: street2
+            state: OK
+          ownershipPercentage: 100
+        - firstName: John
+          lastName: Doe
+          phone: "5551234567"
+          dob: 2000-01-23T04:56:07.000+00:00
+          title: CEO
+          email: test@test.com
+          ssn: "5554449999"
+          homeAddress:
+            zip: "74555"
+            country: country
+            city: Tulsa
+            street1: 125 West Third Street 1st Floor
+            street2: street2
+            state: OK
+          ownershipPercentage: 100
+        businessDetails:
+          legalName: ACME LLC.
+          ownershipType: null
+          website: https://www.acme.com
+          address:
+            zip: "74555"
+            country: country
+            city: Tulsa
+            street1: 125 West Third Street 1st Floor
+            street2: street2
+            state: OK
+          establishedDate: 1959-02-03T00:00:00.000+00:00
+          phone: "5551234567"
+          taxId: "123456789"
+          dbaName: ACME
+          mcc: 7297
+      properties:
+        externalId:
+          maxLength: 250
+          minLength: 3
+          nullable: true
+          type: string
+        isvName:
+          maxLength: 50
+          minLength: 3
+          type: string
+        businessDetails:
+          $ref: '#/components/schemas/BusinessDetailsModel'
+        customerServiceContact:
+          $ref: '#/components/schemas/CustomerServiceContactModel'
+        riskContact:
+          $ref: '#/components/schemas/RiskContactModel'
+        businessContact:
+          $ref: '#/components/schemas/PersonModel'
+        processingDetails:
+          $ref: '#/components/schemas/ProcessingDetailsModel'
+        bankDetails:
+          $ref: '#/components/schemas/BankDetailsModel'
+        pricingStructure:
+          $ref: '#/components/schemas/PricingModel'
+        owners:
+          items:
+            $ref: '#/components/schemas/OwnerModel'
+          nullable: true
+          type: array
+      required:
+      - bankDetails
+      - businessContact
+      - businessDetails
+      - customerServiceContact
+      - isvName
+      - pricingStructure
+      - processingDetails
+      - riskContact
+      type: object
+    ApplicationSubmitResponseModel:
+      example:
+        appId: appId
+      properties:
+        appId:
+          nullable: true
+          type: string
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    BankDetailsModel:
+      example:
+        routingNumber: "082900872"
+        accountNumber: "1234567890"
+      properties:
+        routingNumber:
+          description: Bank Routing Number
+          example: "082900872"
+          maxLength: 9
+          minLength: 1
+          pattern: "^[0-9]{9}"
+          type: string
+          x-konfig-original-example: "082900872"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BankDetailsModel-properties-routingNumber
+        accountNumber:
+          description: Bank Account Number
+          example: "1234567890"
+          format: password
+          maxLength: 30
+          minLength: 3
+          pattern: "^[0-9]{3,30}"
+          type: string
+          x-konfig-original-example: "1234567890"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BankDetailsModel-properties-accountNumber
+      required:
+      - accountNumber
+      - routingNumber
+      type: object
+    BusinessDetailsModel:
+      example:
+        legalName: ACME LLC.
+        ownershipType: null
+        website: https://www.acme.com
+        address:
+          zip: "74555"
+          country: country
+          city: Tulsa
+          street1: 125 West Third Street 1st Floor
+          street2: street2
+          state: OK
+        establishedDate: 1959-02-03T00:00:00.000+00:00
+        phone: "5551234567"
+        taxId: "123456789"
+        dbaName: ACME
+        mcc: 7297
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressModel'
+        phone:
+          example: "5551234567"
+          maxLength: 10
+          minLength: 1
+          pattern: "^[2-9]\\d{9}$"
+          type: string
+          x-konfig-original-example: "5551234567"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-phone
+        establishedDate:
+          description: Date your business was established
+          example: 1959-02-03
+          format: date
+          type: string
+          x-konfig-original-example: 1959-02-03
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-establishedDate
+        legalName:
+          description: Legal name of your business
+          example: ACME LLC.
+          maxLength: 40
+          minLength: 3
+          pattern: "^[0-9A-Za-z ,'.&;_\\-]+$"
+          type: string
+          x-konfig-original-example: ACME LLC.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-legalName
+        dbaName:
+          description: The name you are doing business as
+          example: ACME
+          maxLength: 40
+          minLength: 3
+          pattern: "^[0-9A-Za-z ,'.&;_\\-]+$"
+          type: string
+          x-konfig-original-example: ACME
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-dbaName
+        taxId:
+          description: Federal Tax Id
+          example: "123456789"
+          maxLength: 9
+          minLength: 1
+          pattern: "^\\d{9}$"
+          type: string
+          x-konfig-original-example: "123456789"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-taxId
+        website:
+          description: Company website
+          example: https://www.acme.com
+          maxLength: 48
+          minLength: 1
+          type: string
+          x-konfig-original-example: https://www.acme.com
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-website
+        mcc:
+          description: Merchant Category Code
+          example: 7297
+          format: int32
+          maximum: 9999
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 7297
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-mcc
+        ownershipType:
+          $ref: '#/components/schemas/OwnershipTypeEnum'
+      required:
+      - address
+      - dbaName
+      - establishedDate
+      - legalName
+      - mcc
+      - ownershipType
+      - phone
+      - taxId
+      - website
+      type: object
+    CardTypeEnum:
+      enum:
+      - UNKNOWN
+      - Visa
+      - MasterCard
+      - AmericanExpress
+      - Discover
+      type: string
+    CreateSessionRequest:
+      example:
+        pricingPlanId: APFOG8GTO04FKF
+        redirectUrl: https://test.com/return
+        refreshUrl: https://test.com/refresh
+        companyName: Test
+        externalId: Test1234
+        completeUrl: https://test.com/complete
+        businessDetails:
+          legalName: ACME LLC.
+          website: https://www.acme.com
+          address:
+            zip: "74555"
+            country: country
+            city: Tulsa
+            street1: 125 West Third Street 1st Floor
+            street2: street2
+            state: OK
+          establishedDate: 1959-02-03T00:00:00.000+00:00
+          phone: "5551234567"
+          taxId: "123456789"
+          dbaName: ACME
+        signer:
+          firstName: Testor
+          lastName: Testington
+          emailAddress: test@test.com
+      properties:
+        pricingPlanId:
+          description: Id of the Pricing Plan. Only used if enabled for the partner
+          example: APFOG8GTO04FKF
+          nullable: true
+          type: string
+          x-konfig-original-example: APFOG8GTO04FKF
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest-properties-pricingPlanId
+        signer:
+          $ref: '#/components/schemas/CreateSessionRequest.SignerModel'
+        companyName:
+          description: Name of the merchant account
+          example: Test
+          minLength: 1
+          type: string
+          x-konfig-original-example: Test
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest-properties-companyName
+        redirectUrl:
+          description: Url to redirect the merchant user to when clicking the back
+            button
+          example: https://test.com/return
+          format: uri
+          minLength: 1
+          type: string
+          x-konfig-original-example: https://test.com/return
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest-properties-redirectUrl
+        completeUrl:
+          description: Url to redirect the merchant user to upon completing the application
+          example: https://test.com/complete
+          format: uri
+          minLength: 1
+          type: string
+          x-konfig-original-example: https://test.com/complete
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest-properties-completeUrl
+        refreshUrl:
+          description: Url to redirect to the merchant user to when their session
+            is expired
+          example: https://test.com/refresh
+          format: uri
+          minLength: 1
+          type: string
+          x-konfig-original-example: https://test.com/refresh
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest-properties-refreshUrl
+        externalId:
+          description: Unique identifier for the merchant in your system
+          example: Test1234
+          maxLength: 250
+          minLength: 3
+          type: string
+          x-konfig-original-example: Test1234
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest-properties-externalId
+        businessDetails:
+          $ref: '#/components/schemas/SessionBusinessDetailsModel'
+      required:
+      - companyName
+      - completeUrl
+      - externalId
+      - redirectUrl
+      - refreshUrl
+      - signer
+      type: object
+    CreateSessionRequest.SignerModel:
+      example:
+        firstName: Testor
+        lastName: Testington
+        emailAddress: test@test.com
+      properties:
+        emailAddress:
+          description: Email address of the merchant signer(the user who you are redirecting
+            to complete the application
+          example: test@test.com
+          maxLength: 64
+          minLength: 1
+          pattern: "^(?:[A-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[A-z0-9!#$%&'*+\\/=?^_`{|}~-]+)*|\"\
+            (?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\\
+            [\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[A-z0-9](?:[A-z0-9-]*[A-z0-9])?\\\
+            .)+[A-z0-9](?:[A-z0-9-]*[A-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\
+            .){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[A-z0-9-]*[A-z0-9]:(?:[\\\
+            x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\\
+            x0b\\x0c\\x0e-\\x7f])+)\\])$"
+          type: string
+          x-konfig-original-example: test@test.com
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest.SignerModel-properties-emailAddress
+        firstName:
+          description: FirstName of the Signer
+          example: Testor
+          maxLength: 15
+          minLength: 1
+          type: string
+          x-konfig-original-example: Testor
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest.SignerModel-properties-firstName
+        lastName:
+          description: LastName of the Signer
+          example: Testington
+          maxLength: 15
+          minLength: 1
+          type: string
+          x-konfig-original-example: Testington
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest.SignerModel-properties-lastName
+      required:
+      - emailAddress
+      - firstName
+      - lastName
+      type: object
+    CustomerServiceContactModel:
+      example:
+        phone: "5551234567"
+        email: test@test.com
+      properties:
+        phone:
+          example: "5551234567"
+          maxLength: 10
+          minLength: 1
+          pattern: "^[2-9]\\d{9}$"
+          type: string
+          x-konfig-original-example: "5551234567"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CustomerServiceContactModel-properties-phone
+        email:
+          example: test@test.com
+          maxLength: 64
+          minLength: 1
+          pattern: "^(?:[A-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[A-z0-9!#$%&'*+\\/=?^_`{|}~-]+)*|\"\
+            (?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\\
+            [\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[A-z0-9](?:[A-z0-9-]*[A-z0-9])?\\\
+            .)+[A-z0-9](?:[A-z0-9-]*[A-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\
+            .){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[A-z0-9-]*[A-z0-9]:(?:[\\\
+            x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\\
+            x0b\\x0c\\x0e-\\x7f])+)\\])$"
+          type: string
+          x-konfig-original-example: test@test.com
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CustomerServiceContactModel-properties-email
+      required:
+      - email
+      - phone
+      type: object
+    DepositModel:
+      example:
+        date: 2000-01-23T04:56:07.000+00:00
+        subMerchantId: subMerchantId
+        amount: 0.8008281904610115
+        type: null
+        transactions:
+        - date: 2000-01-23T04:56:07.000+00:00
+          amount: 6.027456183070403
+          authCode: authCode
+          userData: userData
+          maskedPan: maskedPan
+          refNumber: refNumber
+          fee: 1.4658129805029452
+          cardholderName: cardholderName
+          cardType: null
+          type: type
+          batchId: batchId
+          expDate: expDate
+        - date: 2000-01-23T04:56:07.000+00:00
+          amount: 6.027456183070403
+          authCode: authCode
+          userData: userData
+          maskedPan: maskedPan
+          refNumber: refNumber
+          fee: 1.4658129805029452
+          cardholderName: cardholderName
+          cardType: null
+          type: type
+          batchId: batchId
+          expDate: expDate
+      properties:
+        date:
+          format: date-time
+          type: string
+        type:
+          $ref: '#/components/schemas/DepositType'
+        subMerchantId:
+          nullable: true
+          type: string
+        amount:
+          format: double
+          type: number
+        transactions:
+          items:
+            $ref: '#/components/schemas/TransactionModel'
+          nullable: true
+          type: array
+      type: object
+    DepositType:
+      enum:
+      - UNKNOWN
+      - Transactions
+      - Fees
+      type: string
+    ErrorResponse:
+      properties:
+        status:
+          format: int32
+          type: integer
+        message:
+          nullable: true
+          type: string
+      type: object
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    MultiErrorResponse:
+      properties:
+        status:
+          format: int32
+          type: integer
+        messages:
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    OwnerModel:
+      example:
+        firstName: John
+        lastName: Doe
+        phone: "5551234567"
+        dob: 2000-01-23T04:56:07.000+00:00
+        title: CEO
+        email: test@test.com
+        ssn: "5554449999"
+        homeAddress:
+          zip: "74555"
+          country: country
+          city: Tulsa
+          street1: 125 West Third Street 1st Floor
+          street2: street2
+          state: OK
+        ownershipPercentage: 100
+      properties:
+        title:
+          example: CEO
+          maxLength: 40
+          minLength: 1
+          type: string
+          x-konfig-original-example: CEO
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OwnerModel-properties-title
+        firstName:
+          example: John
+          maxLength: 15
+          minLength: 1
+          type: string
+          x-konfig-original-example: John
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OwnerModel-properties-firstName
+        lastName:
+          example: Doe
+          maxLength: 15
+          minLength: 1
+          type: string
+          x-konfig-original-example: Doe
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OwnerModel-properties-lastName
+        email:
+          example: test@test.com
+          minLength: 1
+          pattern: "^(?:[A-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[A-z0-9!#$%&'*+\\/=?^_`{|}~-]+)*|\"\
+            (?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\\
+            [\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[A-z0-9](?:[A-z0-9-]*[A-z0-9])?\\\
+            .)+[A-z0-9](?:[A-z0-9-]*[A-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\
+            .){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[A-z0-9-]*[A-z0-9]:(?:[\\\
+            x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\\
+            x0b\\x0c\\x0e-\\x7f])+)\\])$"
+          type: string
+          x-konfig-original-example: test@test.com
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OwnerModel-properties-email
+        phone:
+          example: "5551234567"
+          maxLength: 10
+          minLength: 1
+          pattern: "^[2-9]\\d{9}$"
+          type: string
+          x-konfig-original-example: "5551234567"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OwnerModel-properties-phone
+        dob:
+          description: Date of birth
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 1947-03-25
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OwnerModel-properties-dob
+        ssn:
+          description: Social Security Number
+          example: "5554449999"
+          nullable: true
+          pattern: "^(?!666|000|9\\d{2})[0-9]{3}(?!00)[0-9]{2}(?!0000)[0-9]{4}$"
+          type: string
+          x-konfig-original-example: "5554449999"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OwnerModel-properties-ssn
+        homeAddress:
+          $ref: '#/components/schemas/AddressModel'
+        ownershipPercentage:
+          example: 100
+          format: int32
+          maximum: 100
+          minimum: 1
+          pattern: \d+
+          type: integer
+          x-konfig-original-example: 100
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OwnerModel-properties-ownershipPercentage
+      required:
+      - email
+      - firstName
+      - lastName
+      - ownershipPercentage
+      - phone
+      - title
+      type: object
+    OwnershipTypeEnum:
+      enum:
+      - Unknown
+      - SoleProprietorship
+      - Partnership
+      - PrivateCorporation
+      - FinancialInstitution
+      - NonProfit
+      - Government
+      - PublicCorporation
+      - SECRegulatedCorporation
+      - Trust
+      - LimitedLiabilityCompany
+      type: string
+    PersonModel:
+      example:
+        firstName: John
+        lastName: Doe
+        phone: "5551234567"
+        dob: 2000-01-23T04:56:07.000+00:00
+        title: CEO
+        email: test@test.com
+        ssn: "5554449999"
+        homeAddress:
+          zip: "74555"
+          country: country
+          city: Tulsa
+          street1: 125 West Third Street 1st Floor
+          street2: street2
+          state: OK
+      properties:
+        title:
+          example: CEO
+          maxLength: 40
+          minLength: 1
+          type: string
+          x-konfig-original-example: CEO
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PersonModel-properties-title
+        firstName:
+          example: John
+          maxLength: 15
+          minLength: 1
+          type: string
+          x-konfig-original-example: John
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PersonModel-properties-firstName
+        lastName:
+          example: Doe
+          maxLength: 15
+          minLength: 1
+          type: string
+          x-konfig-original-example: Doe
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PersonModel-properties-lastName
+        email:
+          example: test@test.com
+          minLength: 1
+          pattern: "^(?:[A-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[A-z0-9!#$%&'*+\\/=?^_`{|}~-]+)*|\"\
+            (?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\\
+            [\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[A-z0-9](?:[A-z0-9-]*[A-z0-9])?\\\
+            .)+[A-z0-9](?:[A-z0-9-]*[A-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\
+            .){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[A-z0-9-]*[A-z0-9]:(?:[\\\
+            x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\\
+            x0b\\x0c\\x0e-\\x7f])+)\\])$"
+          type: string
+          x-konfig-original-example: test@test.com
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PersonModel-properties-email
+        phone:
+          example: "5551234567"
+          maxLength: 10
+          minLength: 1
+          pattern: "^[2-9]\\d{9}$"
+          type: string
+          x-konfig-original-example: "5551234567"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PersonModel-properties-phone
+        dob:
+          description: Date of birth
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 1947-03-25
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PersonModel-properties-dob
+        ssn:
+          description: Social Security Number
+          example: "5554449999"
+          nullable: true
+          pattern: "^(?!666|000|9\\d{2})[0-9]{3}(?!00)[0-9]{2}(?!0000)[0-9]{4}$"
+          type: string
+          x-konfig-original-example: "5554449999"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PersonModel-properties-ssn
+        homeAddress:
+          $ref: '#/components/schemas/AddressModel'
+      required:
+      - email
+      - firstName
+      - lastName
+      - phone
+      - title
+      type: object
+    PricingModel:
+      example:
+        billingFrequency: null
+        discover:
+          rate: 2.5
+          fee: 0.25
+        amex:
+          rate: 2.5
+          fee: 0.25
+        program: null
+        monthlyFee: 25
+        visaMasterCard:
+          rate: 2.5
+          fee: 0.25
+      properties:
+        amex:
+          $ref: '#/components/schemas/PricingModel.PricingStructureCardModel'
+        visaMasterCard:
+          $ref: '#/components/schemas/PricingModel.PricingStructureCardModel'
+        discover:
+          $ref: '#/components/schemas/PricingModel.PricingStructureCardModel'
+        monthlyFee:
+          example: 25
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+          x-konfig-original-example: 25
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PricingModel-properties-monthlyFee
+        billingFrequency:
+          $ref: '#/components/schemas/PricingModel.BillingFrequencyEnum'
+        program:
+          $ref: '#/components/schemas/PricingProgramEnum'
+      required:
+      - amex
+      - discover
+      - monthlyFee
+      - visaMasterCard
+      type: object
+    PricingModel.BillingFrequencyEnum:
+      enum:
+      - Monthly
+      - Daily
+      type: string
+    PricingModel.PricingStructureCardModel:
+      example:
+        rate: 2.5
+        fee: 0.25
+      properties:
+        rate:
+          example: 2.5
+          format: double
+          maximum: 10
+          minimum: 0
+          type: number
+          x-konfig-original-example: 2.5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PricingModel.PricingStructureCardModel-properties-rate
+        fee:
+          example: 0.25
+          format: double
+          maximum: 10
+          minimum: 0
+          type: number
+          x-konfig-original-example: 0.25
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PricingModel.PricingStructureCardModel-properties-fee
+      required:
+      - fee
+      - rate
+      type: object
+    PricingProgramEnum:
+      enum:
+      - MerchantServices
+      - PlatformServices
+      type: string
+    ProcessingDetailsModel:
+      example:
+        billingDescriptor: ACME_WEST_POS
+        monthlyTransactionVolume: 1000
+        cardPresentPerctange: 10
+        dailyTransactionCount: 5000
+        highTransactionAmount: 4000
+        cardNotPresentPerctange: 90
+        averageTransactionAmount: 3000
+        lowTransactionAmount: 2000
+      properties:
+        billingDescriptor:
+          example: ACME_WEST_POS
+          maxLength: 21
+          minLength: 1
+          pattern: "^[^<>'\" *]+$"
+          type: string
+          x-konfig-original-example: ACME_WEST_POS
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-billingDescriptor
+        monthlyTransactionVolume:
+          example: 1000
+          format: int32
+          maximum: 999999999
+          minimum: 1
+          pattern: \d+
+          type: integer
+          x-konfig-original-example: 1000
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-monthlyTransactionVolume
+        lowTransactionAmount:
+          example: 2000
+          format: int32
+          maximum: 999999999
+          minimum: 1
+          pattern: \d+
+          type: integer
+          x-konfig-original-example: 2000
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-lowTransactionAmount
+        averageTransactionAmount:
+          example: 3000
+          format: int32
+          maximum: 999999999
+          minimum: 1
+          pattern: \d+
+          type: integer
+          x-konfig-original-example: 3000
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-averageTransactionAmount
+        highTransactionAmount:
+          example: 4000
+          format: int32
+          maximum: 999999999
+          minimum: 1
+          pattern: \d+
+          type: integer
+          x-konfig-original-example: 4000
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-highTransactionAmount
+        dailyTransactionCount:
+          example: 5000
+          format: int32
+          maximum: 999999999
+          minimum: 1
+          pattern: \d+
+          type: integer
+          x-konfig-original-example: 5000
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-dailyTransactionCount
+        cardNotPresentPerctange:
+          example: 90
+          format: int32
+          maximum: 100
+          minimum: 0
+          pattern: \d+
+          type: integer
+          x-konfig-original-example: 90
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-cardNotPresentPerctange
+        cardPresentPerctange:
+          example: 10
+          format: int32
+          maximum: 100
+          minimum: 0
+          pattern: \d+
+          type: integer
+          x-konfig-original-example: 10
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-cardPresentPerctange
+      required:
+      - averageTransactionAmount
+      - billingDescriptor
+      - cardNotPresentPerctange
+      - cardPresentPerctange
+      - dailyTransactionCount
+      - highTransactionAmount
+      - lowTransactionAmount
+      - monthlyTransactionVolume
+      type: object
+    RiskContactModel:
+      example:
+        firstName: John
+        lastName: Doe
+        email: test@test.com
+      properties:
+        firstName:
+          example: John
+          maxLength: 25
+          minLength: 1
+          type: string
+          x-konfig-original-example: John
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-RiskContactModel-properties-firstName
+        lastName:
+          example: Doe
+          maxLength: 25
+          minLength: 1
+          type: string
+          x-konfig-original-example: Doe
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-RiskContactModel-properties-lastName
+        email:
+          example: test@test.com
+          maxLength: 64
+          minLength: 1
+          pattern: "^(?:[A-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[A-z0-9!#$%&'*+\\/=?^_`{|}~-]+)*|\"\
+            (?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\\
+            [\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[A-z0-9](?:[A-z0-9-]*[A-z0-9])?\\\
+            .)+[A-z0-9](?:[A-z0-9-]*[A-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\
+            .){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[A-z0-9-]*[A-z0-9]:(?:[\\\
+            x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\\
+            x0b\\x0c\\x0e-\\x7f])+)\\])$"
+          type: string
+          x-konfig-original-example: test@test.com
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-RiskContactModel-properties-email
+      required:
+      - email
+      - firstName
+      - lastName
+      type: object
+    SessionBusinessDetailsModel:
+      example:
+        legalName: ACME LLC.
+        website: https://www.acme.com
+        address:
+          zip: "74555"
+          country: country
+          city: Tulsa
+          street1: 125 West Third Street 1st Floor
+          street2: street2
+          state: OK
+        establishedDate: 1959-02-03T00:00:00.000+00:00
+        phone: "5551234567"
+        taxId: "123456789"
+        dbaName: ACME
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressModel'
+        phone:
+          example: "5551234567"
+          maxLength: 10
+          nullable: true
+          pattern: "^[2-9]\\d{9}$"
+          type: string
+          x-konfig-original-example: "5551234567"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SessionBusinessDetailsModel-properties-phone
+        establishedDate:
+          description: Date your business was established
+          example: 1959-02-03
+          format: date
+          type: string
+          x-konfig-original-example: 1959-02-03
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SessionBusinessDetailsModel-properties-establishedDate
+        legalName:
+          description: Legal name of your business
+          example: ACME LLC.
+          maxLength: 40
+          minLength: 3
+          nullable: true
+          pattern: "^[0-9A-Za-z ,'.&;_\\-]+$"
+          type: string
+          x-konfig-original-example: ACME LLC.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SessionBusinessDetailsModel-properties-legalName
+        dbaName:
+          description: The name you are doing business as
+          example: ACME
+          maxLength: 40
+          minLength: 3
+          nullable: true
+          pattern: "^[0-9A-Za-z ,'.&;_\\-]+$"
+          type: string
+          x-konfig-original-example: ACME
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SessionBusinessDetailsModel-properties-dbaName
+        taxId:
+          description: Federal Tax Id
+          example: "123456789"
+          maxLength: 9
+          nullable: true
+          pattern: "^\\d{9}$"
+          type: string
+          x-konfig-original-example: "123456789"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SessionBusinessDetailsModel-properties-taxId
+        website:
+          description: Company website
+          example: https://www.acme.com
+          maxLength: 48
+          nullable: true
+          type: string
+          x-konfig-original-example: https://www.acme.com
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SessionBusinessDetailsModel-properties-website
+      type: object
+    SessionResponse:
+      example:
+        expired: true
+        appId: appId
+        externalId: externalId
+        validUntil: 2000-01-23T04:56:07.000+00:00
+        sessionId: sessionId
+        complete: true
+        url: url
+      properties:
+        sessionId:
+          nullable: true
+          type: string
+        appId:
+          nullable: true
+          type: string
+        externalId:
+          nullable: true
+          type: string
+        validUntil:
+          format: date-time
+          type: string
+        complete:
+          type: boolean
+        url:
+          nullable: true
+          type: string
+        expired:
+          type: boolean
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    TransactionMetadataRequest:
+      example:
+        merchantId: 4BCD-3FGH
+        cardHolderName: John Doe
+        orderId: "321654987"
+        externalId: abcdef123456
+        transactionId: transactionId
+        partnerFee: 1.25
+        itemCount: 1
+      properties:
+        transactionId:
+          description: The transaction Id from the payment processor
+          maxLength: 35
+          minLength: 1
+          type: string
+        merchantId:
+          description: Payfactoy's merchant Id
+          example: 4BCD-3FGH
+          minLength: 1
+          pattern: "^[A-Z0-9]{4}-[A-Z0-9]{4}$"
+          type: string
+          x-konfig-original-example: 4BCD-3FGH
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-merchantId
+        cardHolderName:
+          description: Name of the Cardholder
+          example: John Doe
+          maxLength: 100
+          minLength: 1
+          type: string
+          x-konfig-original-example: John Doe
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-cardHolderName
+        externalId:
+          description: Any identifier you choose to send
+          example: abcdef123456
+          maxLength: 50
+          nullable: true
+          type: string
+          x-konfig-original-example: abcdef123456
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-externalId
+        orderId:
+          description: Any identifier you choose to send
+          example: "321654987"
+          maxLength: 50
+          nullable: true
+          type: string
+          x-konfig-original-example: "321654987"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-orderId
+        partnerFee:
+          description: Required if partner is configured for the partner fee program
+          example: 1.25
+          format: double
+          nullable: true
+          type: number
+          x-konfig-original-example: 1.25
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-partnerFee
+        itemCount:
+          description: Number of items sold in the transaction
+          example: 1
+          format: int32
+          nullable: true
+          type: integer
+          x-konfig-original-example: 1
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-itemCount
+      required:
+      - cardHolderName
+      - merchantId
+      - transactionId
+      type: object
+    TransactionModel:
+      example:
+        date: 2000-01-23T04:56:07.000+00:00
+        amount: 6.027456183070403
+        authCode: authCode
+        userData: userData
+        maskedPan: maskedPan
+        refNumber: refNumber
+        fee: 1.4658129805029452
+        cardholderName: cardholderName
+        cardType: null
+        type: type
+        batchId: batchId
+        expDate: expDate
+      properties:
+        date:
+          format: date-time
+          type: string
+        amount:
+          format: double
+          type: number
+        fee:
+          format: double
+          type: number
+        maskedPan:
+          nullable: true
+          type: string
+        cardType:
+          $ref: '#/components/schemas/CardTypeEnum'
+        cardholderName:
+          nullable: true
+          type: string
+        expDate:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+        refNumber:
+          nullable: true
+          type: string
+        batchId:
+          nullable: true
+          type: string
+        authCode:
+          nullable: true
+          type: string
+        userData:
+          nullable: true
+          type: string
+      type: object
+    DocumentUploadAgreementRequest:
+      properties:
+        Document:
+          example: !!binary |-
+            LnBkZg==
+          format: binary
+          type: string
+          x-konfig-original-example: .pdf
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-DocumentUploadAgreementRequest-properties-Document
+      required:
+      - Document
+      type: object
+    TransactionCreateMetadataBulkRequest:
+      items:
+        $ref: '#/components/schemas/TransactionMetadataRequest'
+      type: array
+    ApplicationGetApplicationStatusResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ApplicationGetApplicationStatusResponse
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    ApplicationGetApplicationDetailsResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ApplicationGetApplicationDetailsResponse
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    ApplicationStartUnderwritingProcessResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ApplicationStartUnderwritingProcessResponse
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    ApplicationCreateNewApplicationResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ApplicationCreateNewApplicationResponse
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    ApplicationFormGetSessionInfoResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ApplicationFormGetSessionInfoResponse
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    ApplicationFormUpdateSessionActivityResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ApplicationFormUpdateSessionActivityResponse
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    ApplicationFormCreateSessionResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ApplicationFormCreateSessionResponse
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    ReportingGetDepositsResponse:
+      items:
+        $ref: '#/components/schemas/DepositModel'
+      type: array
+      x-konfig-is-used-in-successful-response: true
+    ReportingGetDeposits401Response:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ReportingGetDeposits401Response
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    ReportingGetDepositsByReferenceIdResponse:
+      items:
+        $ref: '#/components/schemas/DepositModel'
+      type: array
+      x-konfig-is-used-in-successful-response: true
+    ReportingGetDepositsByReferenceId401Response:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ReportingGetDepositsByReferenceId401Response
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    ReportingGetAchTransactionsByReferenceIdResponse:
+      items:
+        $ref: '#/components/schemas/DepositModel'
+      type: array
+      x-konfig-is-used-in-successful-response: true
+    ReportingGetAchTransactionsByReferenceId401Response:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ReportingGetAchTransactionsByReferenceId401Response
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    ReportingGetDepositsByCountResponse:
+      items:
+        $ref: '#/components/schemas/DepositModel'
+      type: array
+      x-konfig-is-used-in-successful-response: true
+    ReportingGetDepositsByCount401Response:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ReportingGetDepositsByCount401Response
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    TransactionCreateMetadataResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionCreateMetadataResponse
+      x-konfig-is-used-in-successful-response: true
+    TransactionCreateMetadata401Response:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionCreateMetadata401Response
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    TransactionCreateMetadataBulkResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionCreateMetadataBulkResponse
+      x-konfig-is-used-in-successful-response: true
+    TransactionCreateMetadataBulk401Response:
+      example: {}
+      properties: {}
+      type: object
+      x-konfig-original-example: {}
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionCreateMetadataBulk401Response
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AddressModel-properties-street1:
+      example: 125 West Third Street 1st Floor
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AddressModel-properties-city:
+      example: Tulsa
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AddressModel-properties-state:
+      example: OK
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AddressModel-properties-zip:
+      example: "74555"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BankDetailsModel-properties-routingNumber:
+      example: "082900872"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BankDetailsModel-properties-accountNumber:
+      example: "1234567890"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-phone:
+      example: "5551234567"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-establishedDate:
+      example: 1959-02-03
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-legalName:
+      example: ACME LLC.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-dbaName:
+      example: ACME
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-taxId:
+      example: "123456789"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-website:
+      example: https://www.acme.com
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BusinessDetailsModel-properties-mcc:
+      example: 7297
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CreateSessionRequest-properties-pricingPlanId:
+      example: APFOG8GTO04FKF
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CreateSessionRequest-properties-companyName:
+      example: Test
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CreateSessionRequest-properties-redirectUrl:
+      example: https://test.com/return
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CreateSessionRequest-properties-completeUrl:
+      example: https://test.com/complete
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CreateSessionRequest-properties-refreshUrl:
+      example: https://test.com/refresh
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CreateSessionRequest-properties-externalId:
+      example: Test1234
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CreateSessionRequest.SignerModel-properties-emailAddress:
+      example: test@test.com
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CreateSessionRequest.SignerModel-properties-firstName:
+      example: Testor
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CreateSessionRequest.SignerModel-properties-lastName:
+      example: Testington
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CustomerServiceContactModel-properties-phone:
+      example: "5551234567"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CustomerServiceContactModel-properties-email:
+      example: test@test.com
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OwnerModel-properties-title:
+      example: CEO
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OwnerModel-properties-firstName:
+      example: John
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OwnerModel-properties-lastName:
+      example: Doe
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OwnerModel-properties-email:
+      example: test@test.com
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OwnerModel-properties-phone:
+      example: "5551234567"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OwnerModel-properties-dob:
+      example: 1947-03-25
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OwnerModel-properties-ssn:
+      example: "5554449999"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OwnerModel-properties-ownershipPercentage:
+      example: 100
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PersonModel-properties-title:
+      example: CEO
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PersonModel-properties-firstName:
+      example: John
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PersonModel-properties-lastName:
+      example: Doe
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PersonModel-properties-email:
+      example: test@test.com
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PersonModel-properties-phone:
+      example: "5551234567"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PersonModel-properties-dob:
+      example: 1947-03-25
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PersonModel-properties-ssn:
+      example: "5554449999"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PricingModel-properties-monthlyFee:
+      example: 25
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PricingModel.PricingStructureCardModel-properties-rate:
+      example: 2.5
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PricingModel.PricingStructureCardModel-properties-fee:
+      example: 0.25
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-billingDescriptor:
+      example: ACME_WEST_POS
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-monthlyTransactionVolume:
+      example: 1000
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-lowTransactionAmount:
+      example: 2000
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-averageTransactionAmount:
+      example: 3000
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-highTransactionAmount:
+      example: 4000
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-dailyTransactionCount:
+      example: 5000
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-cardNotPresentPerctange:
+      example: 90
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ProcessingDetailsModel-properties-cardPresentPerctange:
+      example: 10
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-RiskContactModel-properties-firstName:
+      example: John
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-RiskContactModel-properties-lastName:
+      example: Doe
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-RiskContactModel-properties-email:
+      example: test@test.com
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SessionBusinessDetailsModel-properties-phone:
+      example: "5551234567"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SessionBusinessDetailsModel-properties-establishedDate:
+      example: 1959-02-03
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SessionBusinessDetailsModel-properties-legalName:
+      example: ACME LLC.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SessionBusinessDetailsModel-properties-dbaName:
+      example: ACME
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SessionBusinessDetailsModel-properties-taxId:
+      example: "123456789"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SessionBusinessDetailsModel-properties-website:
+      example: https://www.acme.com
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-merchantId:
+      example: 4BCD-3FGH
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-cardHolderName:
+      example: John Doe
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-externalId:
+      example: abcdef123456
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-orderId:
+      example: "321654987"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-partnerFee:
+      example: 1.25
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-itemCount:
+      example: 1
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-DocumentUploadAgreementRequest-properties-Document:
+      example: .pdf
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ApplicationGetApplicationStatusResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ApplicationGetApplicationDetailsResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ApplicationStartUnderwritingProcessResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ApplicationCreateNewApplicationResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ApplicationFormGetSessionInfoResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ApplicationFormUpdateSessionActivityResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ApplicationFormCreateSessionResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ReportingGetDeposits401Response:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ReportingGetDepositsByReferenceId401Response:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ReportingGetAchTransactionsByReferenceId401Response:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ReportingGetDepositsByCount401Response:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TransactionCreateMetadataResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TransactionCreateMetadata401Response:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TransactionCreateMetadataBulkResponse:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TransactionCreateMetadataBulk401Response:
+      example: {}
+      properties: {}
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-single-parameter-schema-get--v1-Application-Status-appId:
+      properties:
+        appId:
+          type: string
+      required:
+      - appId
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - appId
+    konfig-generated-schema-single-parameter-schema-get--v1-Application-Details-appId:
+      properties:
+        appId:
+          type: string
+      required:
+      - appId
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - appId
+    konfig-generated-schema-single-parameter-schema-post--v1-Application-StartUnderwriting-appId:
+      properties:
+        appId:
+          type: string
+      required:
+      - appId
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - appId
+    konfig-generated-schema-single-parameter-schema-post--v1-Application-Submit:
+      properties:
+        externalId:
+          maxLength: 250
+          minLength: 3
+          nullable: true
+          type: string
+        isvName:
+          maxLength: 50
+          minLength: 3
+          type: string
+        businessDetails:
+          $ref: '#/components/schemas/BusinessDetailsModel'
+        customerServiceContact:
+          $ref: '#/components/schemas/CustomerServiceContactModel'
+        riskContact:
+          $ref: '#/components/schemas/RiskContactModel'
+        businessContact:
+          $ref: '#/components/schemas/PersonModel'
+        processingDetails:
+          $ref: '#/components/schemas/ProcessingDetailsModel'
+        bankDetails:
+          $ref: '#/components/schemas/BankDetailsModel'
+        pricingStructure:
+          $ref: '#/components/schemas/PricingModel'
+        owners:
+          items:
+            $ref: '#/components/schemas/OwnerModel'
+          nullable: true
+          type: array
+      required:
+      - bankDetails
+      - businessContact
+      - businessDetails
+      - customerServiceContact
+      - isvName
+      - pricingStructure
+      - processingDetails
+      - riskContact
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter: []
+    konfig-generated-schema-single-parameter-schema-delete--v1-Application-Delete-appId:
+      properties:
+        appId:
+          type: string
+      required:
+      - appId
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - appId
+    konfig-generated-schema-single-parameter-schema-get--v1-ApplicationForm-session-sessionId:
+      properties:
+        sessionId:
+          type: string
+      required:
+      - sessionId
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - sessionId
+    konfig-generated-schema-single-parameter-schema-put--v1-ApplicationForm-session-sessionId:
+      properties:
+        sessionId:
+          type: string
+      required:
+      - sessionId
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - sessionId
+    konfig-generated-schema-single-parameter-schema-post--v1-ApplicationForm-session:
+      properties:
+        pricingPlanId:
+          description: Id of the Pricing Plan. Only used if enabled for the partner
+          example: APFOG8GTO04FKF
+          nullable: true
+          type: string
+          x-konfig-original-example: APFOG8GTO04FKF
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest-properties-pricingPlanId
+        signer:
+          $ref: '#/components/schemas/CreateSessionRequest.SignerModel'
+        companyName:
+          description: Name of the merchant account
+          example: Test
+          minLength: 1
+          type: string
+          x-konfig-original-example: Test
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest-properties-companyName
+        redirectUrl:
+          description: Url to redirect the merchant user to when clicking the back
+            button
+          example: https://test.com/return
+          format: uri
+          minLength: 1
+          type: string
+          x-konfig-original-example: https://test.com/return
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest-properties-redirectUrl
+        completeUrl:
+          description: Url to redirect the merchant user to upon completing the application
+          example: https://test.com/complete
+          format: uri
+          minLength: 1
+          type: string
+          x-konfig-original-example: https://test.com/complete
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest-properties-completeUrl
+        refreshUrl:
+          description: Url to redirect to the merchant user to when their session
+            is expired
+          example: https://test.com/refresh
+          format: uri
+          minLength: 1
+          type: string
+          x-konfig-original-example: https://test.com/refresh
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest-properties-refreshUrl
+        externalId:
+          description: Unique identifier for the merchant in your system
+          example: Test1234
+          maxLength: 250
+          minLength: 3
+          type: string
+          x-konfig-original-example: Test1234
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CreateSessionRequest-properties-externalId
+        businessDetails:
+          $ref: '#/components/schemas/SessionBusinessDetailsModel'
+      required:
+      - companyName
+      - completeUrl
+      - externalId
+      - redirectUrl
+      - refreshUrl
+      - signer
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter: []
+    konfig-generated-schema-single-parameter-schema-post--v1-Document-Upload-type-appId:
+      properties:
+        type:
+          type: string
+        appId:
+          type: string
+        Document:
+          example: !!binary |-
+            LnBkZg==
+          format: binary
+          type: string
+          x-konfig-original-example: .pdf
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-DocumentUploadAgreementRequest-properties-Document
+      required:
+      - Document
+      - appId
+      - type
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - type
+      - appId
+    konfig-generated-schema-single-parameter-schema-get--v1-Reporting-Deposits:
+      properties: {}
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter: []
+    konfig-generated-schema-single-parameter-schema-get--v1-Reporting-Deposits-referenceId:
+      properties:
+        referenceId:
+          type: string
+      required:
+      - referenceId
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - referenceId
+    konfig-generated-schema-single-parameter-schema-get--v1-Reporting-AchTransactions-referenceId:
+      properties:
+        referenceId:
+          type: string
+      required:
+      - referenceId
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - referenceId
+    konfig-generated-schema-single-parameter-schema-get--v1-Reporting-Deposits-numberOfDeposits:
+      properties:
+        numberOfDeposits:
+          format: int32
+          type: integer
+      required:
+      - numberOfDeposits
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - numberOfDeposits
+    konfig-generated-schema-single-parameter-schema-post--v1-Transaction-Metadata:
+      properties:
+        transactionId:
+          description: The transaction Id from the payment processor
+          maxLength: 35
+          minLength: 1
+          type: string
+        merchantId:
+          description: Payfactoy's merchant Id
+          example: 4BCD-3FGH
+          minLength: 1
+          pattern: "^[A-Z0-9]{4}-[A-Z0-9]{4}$"
+          type: string
+          x-konfig-original-example: 4BCD-3FGH
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-merchantId
+        cardHolderName:
+          description: Name of the Cardholder
+          example: John Doe
+          maxLength: 100
+          minLength: 1
+          type: string
+          x-konfig-original-example: John Doe
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-cardHolderName
+        externalId:
+          description: Any identifier you choose to send
+          example: abcdef123456
+          maxLength: 50
+          nullable: true
+          type: string
+          x-konfig-original-example: abcdef123456
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-externalId
+        orderId:
+          description: Any identifier you choose to send
+          example: "321654987"
+          maxLength: 50
+          nullable: true
+          type: string
+          x-konfig-original-example: "321654987"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-orderId
+        partnerFee:
+          description: Required if partner is configured for the partner fee program
+          example: 1.25
+          format: double
+          nullable: true
+          type: number
+          x-konfig-original-example: 1.25
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-partnerFee
+        itemCount:
+          description: Number of items sold in the transaction
+          example: 1
+          format: int32
+          nullable: true
+          type: integer
+          x-konfig-original-example: 1
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionMetadataRequest-properties-itemCount
+      required:
+      - cardHolderName
+      - merchantId
+      - transactionId
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter: []
+    konfig-generated-schema-single-parameter-schema-post--v1-Transaction-MetadataBulk:
+      properties: {}
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter: []
+  securitySchemes:
+    ApiKey:
+      in: header
+      name: pf-api-key
+      type: apiKey
+      x-konfig-globally-required-security: true
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+
