@@ -71,7 +71,7 @@ public class DocumentUploadAgreementRequest {
    * @return document
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "[B@787b7a32", required = true, value = "")
+  @ApiModelProperty(example = "[B@3e8a939", required = true, value = "")
 
   public File getDocument() {
     return document;
